@@ -1,0 +1,21 @@
+<form
+  [formGroup]="selectServerForm"
+  (ngSubmit)="onSubmit.emit(selectServerForm.value)"
+  class="formgrid grid gap-2"
+>
+  <p-dropdown
+    class="field col w-full"
+    [options]="servers"
+    formControlName="server"
+    optionLabel="name"
+    [showClear]="true"
+    placeholder="Servidores"
+  ></p-dropdown>
+
+  <p-button
+    class="field col w-full"
+    [disabled]="!selectServerForm.valid"
+    type="submit"
+    label="ok"
+  ></p-button>
+</form>
