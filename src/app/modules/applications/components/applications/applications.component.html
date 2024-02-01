@@ -1,3 +1,14 @@
-<h3>
-  Aplicacion funcionando con la IP: <strong> {{ ip | async }} </strong>
-</h3>
+<div class="flex justify-content-center align-items-center h-screen">
+  <div
+    [style]="{ width: '80vw', minHeight: '30vh' }"
+    class="flex gap-3 bg-black-alpha-30 justify-content-center align-items-center flex-wrap"
+  >
+    <p-button
+      *ngFor="let application of applications"
+      (onClick)="onSelectAction(application)"
+      styleClass="border-cyan-300 border-2 w-10rem h-10rem h-flex justify-content-center align-items-center"
+      [label]="application"
+    >
+    </p-button>
+  </div>
+</div>

@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-import { environment } from 'src/env/enviroment';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { catchError, throwError, timeout } from 'rxjs';
 
 @Injectable()
 export class IpService {
-  private SERVER_IP!: string;
+  private http = inject(HttpClient);
 
   private validateIp = (ip: string) => {
     const ipArray = ip.split('.');
@@ -17,38 +18,31 @@ export class IpService {
     }
     return true;
   };
-
-  private setMarketIp(): void {
-    let ip = environment.marketIP;
-
-    if (!this.validateIp(ip)) return;
-
-    this.SERVER_IP = ip;
-  }
-
-  private setPlosaIp(): void {
-    let ip = environment.plosaIP;
-
-    if (!this.validateIp(ip)) return;
-
-    this.SERVER_IP = ip;
-  }
-
-  private getIpName = () => localStorage.getItem('IP_NAME');
-
-  public getCurrentIp(): string | null {
-    const ipName = this.getIpName();
-
-    if (!ipName) return null;
-
-    if (ipName === 'market') {
-      this.setMarketIp();
-    } else if (ipName === 'plosa') {
-      this.setPlosaIp();
-    } else {
-      return null;
+  public testIp = async (ip: string): Promise<boolean> => {
+    if (!this.validateIp(ip)) {
+      return false;
     }
 
-    return this.SERVER_IP;
-  }
+    const url = `http://${ip}/Plosa/`;
+
+    try {
+      await this.http
+        .head(url, { observe: 'response' })
+        .pipe(
+          timeout(2000), // Timeout set to 2 seconds
+          catchError((error) => {
+            // Handle the timeout error here
+            console.error('Request timed out', error);
+            if(error.name === 'TimeoutError') return throwError('Request timed out');
+            return throwError('Error');
+          })
+        )
+        .toPromise(); // Convert the observable to a promise
+      return true; // Request was successful
+    } catch (error) {
+      console.error('Error', error);
+      if(error === 'Request timed out') return false;
+      return true;
+    }
+  };
 }

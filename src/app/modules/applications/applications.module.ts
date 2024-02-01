@@ -11,17 +11,24 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
+import { IpService } from './core/services/ip.service';
+import { HttpClientModule } from '@angular/common/http';
+import { IframeComponent } from './components/iframe/iframe.component';
 
 @NgModule({
-  declarations: [HomeComponent, SelectServerFormComponent, ApplicationsComponent],
+  declarations: [HomeComponent, SelectServerFormComponent, ApplicationsComponent, IframeComponent],
   imports: [
     CommonModule,
     ApplicationsRoutingModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     DropdownModule,
     ButtonModule,
     DialogModule,    
+  ],
+  providers: [
+    IpService
   ],
 })
 export class ApplicationsModule {}
