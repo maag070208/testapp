@@ -47,8 +47,9 @@ export class HomeComponent implements OnInit {
 
     const ip =
       values.server.code === 'market'
-        ? environment.marketIP
-        : environment.plosaIP;
+        ? '201.159.177.110'
+        : '192.168.100.221'
+
 
     const isValidIp = await this._ipService.testIp(ip);
 
