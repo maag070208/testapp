@@ -35,7 +35,6 @@ export class IframeComponent implements OnInit {
       this.router.navigate(['/']);
       return;
     }
-
     this.url = this.sanitizer.bypassSecurityTrustResourceUrl(
       `http://${ip}/Plosa/${this.application}`
     );
