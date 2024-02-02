@@ -12,24 +12,25 @@ import { AppState } from 'src/app/core/state/state';
   styleUrls: ['./iframe.component.scss'],
 })
 export class IframeComponent implements OnInit {
+  public screenWidth: number = window.innerWidth;
+  public screenHeight: number = window.innerHeight;
+
   private router = inject(Router);
   private store = inject(Store<AppState>);
   private sanitizer = inject(DomSanitizer);
+  
   public application: string = '';
   public url: any = '';
 
-  public screenWidth: number = window.innerWidth;
-  public screenHeight: number = window.innerHeight;
 
   async ngOnInit() {
     const router = await firstValueFrom(
       this.router.routerState.root.queryParams
     );
-    console.log(router);
-    this.application = router['application'];
 
+    this.application = router['application'];
     const ip = await firstValueFrom(this.store.select(selectServerIp));
-    
+      
     if (!ip) {
       this.router.navigate(['/']);
       return;

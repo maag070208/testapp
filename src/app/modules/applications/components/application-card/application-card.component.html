@@ -1,0 +1,25 @@
+<div class="d-flex justify-content-center align-items-center">
+  <mat-card
+  [class]="
+    'd-flex flex-column justify-content-between align-items-center shadow-7 ' +
+    'bg-' +
+    application.color
+  "
+  style="width: 450px; height: 150px; margin: 10px"
+>
+  <mat-card-header>
+    <mat-card-title>{{ application.name }}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-actions>
+    <button
+      class="btn btn-primary"
+      color="primary"
+      (click)="onSelectApp(application)"
+    >
+      Abrir
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+</div>

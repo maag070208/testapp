@@ -8,27 +8,39 @@ import { ApplicationsComponent } from './components/applications/applications.co
 //
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DropdownModule } from 'primeng/dropdown';
-import { ButtonModule } from 'primeng/button';
-import { DialogModule } from 'primeng/dialog';
 import { IpService } from './core/services/ip.service';
 import { HttpClientModule } from '@angular/common/http';
 import { IframeComponent } from './components/iframe/iframe.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { ApplicationCardComponent } from './components/application-card/application-card.component'; 
 @NgModule({
-  declarations: [HomeComponent, SelectServerFormComponent, ApplicationsComponent, IframeComponent],
+  declarations: [
+    HomeComponent,
+    SelectServerFormComponent,
+    ApplicationsComponent,
+    IframeComponent,
+    ApplicationCardComponent,
+  ],
   imports: [
     CommonModule,
     ApplicationsRoutingModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    DropdownModule,
-    ButtonModule,
-    DialogModule,    
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule
   ],
-  providers: [
-    IpService
-  ],
+  providers: [IpService],
 })
 export class ApplicationsModule {}

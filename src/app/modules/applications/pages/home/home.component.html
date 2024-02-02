@@ -1,15 +1,4 @@
-<div *ngIf="(ip | async) != ''; else selectServerForm">
+<div *ngIf="(ip | async) != '';">
   <app-applications></app-applications>
 </div>
 
-<ng-template #selectServerForm>
-  <p-dialog
-    header="Selecciona un servidor"
-    [visible]="true"
-    [style]="{ width: '50vw', minHeight: '30vh' }"
-  >
-    <app-select-server-form
-      (onSubmit)="onSubmitSelectForm($event)"
-    ></app-select-server-form>
-  </p-dialog>
-</ng-template>
